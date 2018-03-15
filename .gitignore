@@ -98,3 +98,4 @@ ENV/
 .idea/
 .persist/
 shipane_sdk_config.yaml
+docs/build

@@ -60,6 +60,7 @@ def handle_bar(context, bar_dict):
 
 # 您可以指定您要传递的参数
 if __name__ == "__main__":
+    import os
     config = {
         "base": {
             "start_date": "2016-06-01",
@@ -67,7 +68,7 @@ if __name__ == "__main__":
             "accounts": {"stock": 100000},
             "frequency": "1m",
             "benchmark": None,
-            "data_bundle_path": r"E:\Users\BurdenBear\.rqalpha\bundle",
+            "data_bundle_path": os.path.expanduser("~/.rqalpha/bundle"),
             "strategy_file": __file__,
             "run_type": "p"
         },
@@ -75,11 +76,6 @@ if __name__ == "__main__":
             "log_level": "verbose",
         },
         "mod": {
-            "sys_analyser": {
-                "enabled": True,
-                # "report_save_path": ".",
-                "plot": True
-            },
             "fxdayu_source": {
                 "enabled": True,
                 "source": "quantos",
@@ -91,7 +87,3 @@ if __name__ == "__main__":
         }
     }
     run_file(__file__, config=config)
-    # run_func(init=init, before_trading=before_trading, handle_bar=handle_bar, config=config)
-
-    # 如果你的函数命名是按照 API 规范来，则可以直接按照以下方式来运行
-    # run_func(**globals())
