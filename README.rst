@@ -84,6 +84,7 @@ Shipane SDK wrapper for Rqalpha
                 percent = 0.9 / len(context.symbol)
                 logger.info("Sell %s" % symbol)
                 order_target_percent(symbol, percent)
+                p = context.portfolio.positions[symbol]
                 logger.info("Position of %s,总: %s 今: %s 昨: %s " % (
                     symbol, p.quantity, p.quantity - p.sellable, p.sellable
                 ))
@@ -123,7 +124,6 @@ Shipane SDK wrapper for Rqalpha
 
         run_file(__file__, config=config)
 
-..
 
 .. note::
 

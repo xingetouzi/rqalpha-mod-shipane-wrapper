@@ -40,6 +40,7 @@ def handle_bar(context, bar_dict):
             percent = 0.9 / len(context.symbol)
             logger.info("Sell %s" % symbol)
             order_target_percent(symbol, percent)
+            p = context.portfolio.positions[symbol]
             logger.info("Position of %s,总: %s 今: %s 昨: %s " % (
                 symbol, p.quantity, p.quantity - p.sellable, p.sellable
             ))
