@@ -33,7 +33,7 @@ def handle_bar(context, bar_dict):
             order_target_percent(symbol, percent)
             p = context.portfolio.positions[symbol]
             logger.info("Position of %s,总: %s 今: %s 昨: %s " % (
-                symbol, p.buy_quantity, p.buy_today_quantity, p.closable_buy_quantity
+                symbol, p.quantity, p.quantity - p.sellable, p.sellable
             ))
             context.fired[symbol] = True
         else:
@@ -41,7 +41,7 @@ def handle_bar(context, bar_dict):
             logger.info("Sell %s" % symbol)
             order_target_percent(symbol, percent)
             logger.info("Position of %s,总: %s 今: %s 昨: %s " % (
-                symbol, p.buy_quantity, p.buy_today_quantity, p.closable_buy_quantity
+                symbol, p.quantity, p.quantity - p.sellable, p.sellable
             ))
             context.fired[symbol] = False
 

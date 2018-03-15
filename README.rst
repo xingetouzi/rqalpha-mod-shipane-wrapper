@@ -4,8 +4,10 @@ Shipane SDK wrapper for Rqalpha
 
 介绍
 ========
-本mod主要基于实盘易的 官方SDK_ 中的，目的是使用不侵入策略代码的方式本地接入实盘易。信号发送使用了推送模型中的同步仓位模式。
+本mod基于实盘易的 官方SDK_ ，目的是使用不侵入策略代码的方式本地接入实盘易。信号发送使用了 推送模型_ 中的 同步仓位模式_。
 
+.. _推送模型: https://github.com/sinall/ShiPanE-Python-SDK#id21
+.. _同步仓位模式: https://github.com/sinall/ShiPanE-Python-SDK/blob/master/shipane_sdk/base_manager.py#L231
 .. _官方SDK: https://github.com/sinall/ShiPanE-Python-SDK
 
 特点
@@ -75,7 +77,7 @@ Shipane SDK wrapper for Rqalpha
                 order_target_percent(symbol, percent)
                 p = context.portfolio.positions[symbol]
                 logger.info("Position of %s,总: %s 今: %s 昨: %s " % (
-                    symbol, p.buy_quantity, p.buy_today_quantity, p.closable_buy_quantity
+                    symbol, p.quantity, p.quantity - p.sellable, p.sellable
                 ))
                 context.fired[symbol] = True
             else:
@@ -83,7 +85,7 @@ Shipane SDK wrapper for Rqalpha
                 logger.info("Sell %s" % symbol)
                 order_target_percent(symbol, percent)
                 logger.info("Position of %s,总: %s 今: %s 昨: %s " % (
-                    symbol, p.buy_quantity, p.buy_today_quantity, p.closable_buy_quantity
+                    symbol, p.quantity, p.quantity - p.sellable, p.sellable
                 ))
                 context.fired[symbol] = False
 
@@ -121,6 +123,24 @@ Shipane SDK wrapper for Rqalpha
 
         run_file(__file__, config=config)
 
+..
+
+.. note::
+
+    上述代码以实时交易的模式运行rqalpha，其中实时数据源使用了rqalpha-mod-fxdayu-source中提供的quantos(tushare-pro)数据源。
+    所以需要关于quantos接口的一些配置，详见 rqalpha-mod-fxdayu-source配置_ ，建议通过环境变量来配置。
+
+    环境变量配置示例：
+
+    .. code-block:: shell
+
+        QUANTOS_USER=13XXXXXXX60
+        QUANTOS_TOKEN=eyJhXXXXXXXXXXXXXXUzI1NiJ9.eyJjcmVhdGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXMTM5NTUxMzM3NjAifQ.ZW_HgnsYl_XXXXXXXXXXXXXXXXXXXXH5r7Qo8lw
+
+    quantos 账号只需要去其 官网_ 申请
+
+.. _官网: https://www.quantos.org/
+.. _rqalpha-mod-fxdayu-source配置: https://github.com/xingetouzi/rqalpha-mod-fxdayu-source#%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9
 
 + shipane_sdk_config.yaml
 
@@ -318,10 +338,13 @@ Shipane SDK wrapper for Rqalpha
                         order-interval: 1000
                         extra-rounds: 0
 
+.. note::
+
+    以上模板需要按自己的实盘易运行情况和交易需求来配置
 
 + 运行
 
-将以上两个文件放置于同一目录下，从该目录运行strategy.py
+将以上两个文件放置于同一目录下，做好相应配置，从该目录运行strategy.py
 
 .. code-block:: bash
 
