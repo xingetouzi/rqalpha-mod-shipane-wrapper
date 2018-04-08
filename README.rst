@@ -38,7 +38,9 @@ Shipane SDK wrapper for Rqalpha
 
 用例
 ======
-+ 策略代码strategy.py
++ 策略代码 strategy.py_
+
+.. _strategy.py : https://raw.githubusercontent.com/xingetouzi/rqalpha-mod-shipane-wrapper/master/example/strategy.py
 
 .. code-block:: python
 
@@ -142,7 +144,8 @@ Shipane SDK wrapper for Rqalpha
 .. _官网: https://www.quantos.org/
 .. _rqalpha-mod-fxdayu-source配置: https://github.com/xingetouzi/rqalpha-mod-fxdayu-source#%E9%85%8D%E7%BD%AE%E9%80%89%E9%A1%B9
 
-+ shipane_sdk_config.yaml
++ shipane_sdk_config.yaml_
+.. _shipane_sdk_config.yaml : https://raw.githubusercontent.com/xingetouzi/rqalpha-mod-shipane-wrapper/master/example/shipane_sdk_config_template.yaml
 
 ::
 
@@ -359,6 +362,24 @@ Shipane SDK wrapper for Rqalpha
 shipane_wrapper.enabled       False                           是否开启mod
 shipane_wrapper.manager_id    "manager-1"                     和shipane_sdk_config.yaml中保持一致
 ============================= ==============================  =================================
+
+
+FAQ
+========
+1. 运行时提示找不到某品种的数据：
+实时数据需要安装rqalpha-mod-fxdayu-source模块，检查是否已安装和正确配置
+
+2. better_exceptions模块报错
+两种情况：
+
++ 比较常见的是better_exceptions模块的报错是另一个报错引起的，只要找到最源头的报错信息然后debug。
++ 运行或读取的文件中有特殊字符编码， better_exceptions模块无法识别而报错。解决方法：检查文件以utf-8编码打开是否有乱码，使用支持utf-8的编辑器编辑，
+推荐VSCODE,PYCHARM等。对于示例中的文件，建议直接下载而不是复制粘贴。
+
+3.实盘易运行出错：
+往往是因为实盘易配置不正确，实盘易的配置方法参加 大鱼学院_
+
+.. _大鱼学院: http://www.fxdayu.com/tutorials.html?article=240
 
 
 加入开发
