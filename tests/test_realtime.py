@@ -79,6 +79,8 @@ if __name__ == "__main__":
             "fxdayu_source": {
                 "enabled": True,
                 "source": "quantos",
+                "quantos_user": "13955133760",
+                "quantos_token": "eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVfdGltZSI6IjE1MTk3MDU3NjE4NDMiLCJpc3MiOiJhdXRoMCIsImlkIjoiMTM5NTUxMzM3NjAifQ.ZW_HgnsYl_5aSQGWmtUXYrK9BnO6zsutj6H5r7Qo8lw",
                 "enable_cache": False,
             },
             "shipane_wrapper": {
